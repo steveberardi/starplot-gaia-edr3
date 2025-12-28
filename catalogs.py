@@ -12,7 +12,7 @@ from shapely import Geometry, Polygon, MultiPolygon
 from starplot.models.base import SkyObject
 from starplot.data.utils import download
 
-import polars as pl
+# import polars as pl
 
 
 def to_parquet(
@@ -25,16 +25,19 @@ def to_parquet(
     row_group_size: int = 100_000,
     chunk_id: int = 0,
 ) -> None:
-    # import pandas as pd
-    # import pyarrow as pa
+    import pandas as pd
+    import pyarrow as pa
     import pyarrow.parquet as pq
 
-    df = pl.DataFrame(rows)
-    # df = df.sort_values(sorting_columns) # pandas
-    df = df.sort(sorting_columns)
+    df = pd.DataFrame(rows)
+    df = df.sort_values(sorting_columns)  # pandas
+    # df = df.sort(sorting_columns)
 
-    # table = pa.Table.from_pandas(df)
-    table = df.to_arrow()
+    # if "__index_level_0__" in df.columns:
+
+    table = pa.Table.from_pandas(df)
+    # table = df.to_arrow()
+    table = table.drop_columns("__index_level_0__")
     sort_columns = [pq.SortingColumn(columns.index(c)) for c in sorting_columns]
 
     if partition_columns:

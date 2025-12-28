@@ -31,11 +31,19 @@ clean:
 
 build: venv/bin/activate
 	rm -rf build
+	rm build.log
 	@mkdir -p build
 	$(PYTHON) build.py
 
 chunk: venv/bin/activate
 	$(PYTHON) build.py
+
+m13: venv/bin/activate
+	$(PYTHON) m13.py
+
+profile:
+# 	$(PYTHON) -m cProfile -o results.prof m13.py
+	$(PYTHON) -m snakeviz -s -p 8080 -H 0.0.0.0 results.prof
 
 # Releases ------------------------------------------
 release-check:
