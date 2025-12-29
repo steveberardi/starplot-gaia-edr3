@@ -243,8 +243,10 @@ def chunks(items, n):
 def main():
     time_start = time.time()
 
+    # 3387 total files
+
     start = 0
-    stop = 100  # inclusive
+    stop = 3390  # inclusive
 
     num_workers = 10
 
