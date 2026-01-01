@@ -10,6 +10,7 @@ import settings
 
 SQUASHED_FILENAME = "stars.parquet"
 
+
 def squash_partition(partition_name: str, source_path: Path):
     print(partition_name)
     source_filenames = Path(source_path / partition_name).glob("*.parquet")
@@ -46,10 +47,7 @@ def main(source, num_workers):
         [item.name for item in source_path.iterdir() if item.is_dir()]
     )
 
-    process_args = [
-        (partition_name, source_path)
-        for partition_name in partition_names
-    ]
+    process_args = [(partition_name, source_path) for partition_name in partition_names]
 
     with multiprocessing.Pool(processes=num_workers) as pool:
         results = pool.starmap(squash_partition, process_args)
@@ -60,6 +58,7 @@ def main(source, num_workers):
             for source_file in source_files:
                 if source_file.name != SQUASHED_FILENAME:
                     source_file.unlink()
+
 
 if __name__ == "__main__":
     main()
