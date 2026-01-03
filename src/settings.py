@@ -1,4 +1,3 @@
-
 import pyarrow as pa
 
 SCHEMA = pa.schema(

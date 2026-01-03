@@ -12,7 +12,7 @@ SQUASHED_FILENAME = "stars.parquet"
 
 
 def squash_partition(partition_name: str, source_path: Path):
-    print(partition_name)
+    print(f"Squashing | {partition_name}")
     source_filenames = Path(source_path / partition_name).glob("*.parquet")
     source_filenames = sorted([str(f) for f in source_filenames])
     dataset = pq.ParquetDataset(source_filenames, schema=settings.SCHEMA)

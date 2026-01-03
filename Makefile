@@ -63,13 +63,13 @@ archive: venv/bin/activate
 		--source $(BUILD_DESTINATION) \
 		--destination $(BUILD_DESTINATION_ARCHIVE)
 
-# Mag 6-18 at 50% sampling rate
+# Mag 6-18 at 80% sampling rate
 build-18: BUILD_DESTINATION=$(GAIA_BUILD_PATH_BASE)gaia-18/
 build-18: BUILD_DESTINATION_ARCHIVE=$(GAIA_BUILD_PATH_BASE)gaia-18-archive/
 build-18: BUILD_NSIDE=4
 build-18: BUILD_MAG_MIN=6
 build-18: BUILD_MAG_MAX=18
-build-18: BUILD_SAMPLE_RATE=0.5
+build-18: BUILD_SAMPLE_RATE=0.80
 build-18: venv/bin/activate build squash archive
 
 # Mag 6-18 at 100% sampling rate

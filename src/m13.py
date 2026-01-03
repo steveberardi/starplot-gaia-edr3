@@ -5,7 +5,7 @@ from pathlib import Path
 import time
 
 from starplot import Star, OpticPlot, DSO, Observer, _
-from starplot.models import Refractor
+from starplot.models import Binoculars
 from starplot.styles import PlotStyle, extensions
 from starplot.data.catalogs import Catalog
 
@@ -87,24 +87,26 @@ observer = Observer(
 )
 
 target = DSO.get(m="13")
+# target = DSO.get(ngc="869")
+# target = DSO.get(ngc="5139")
 # target = DSO.get(m="42")
 p = OpticPlot(
     ra=target.ra,
     dec=target.dec,
     observer=observer,
     # Refractor Telescope
-    optic=Refractor(
-        focal_length=714,
-        eyepiece_focal_length=7,
-        eyepiece_fov=82,
-    ),
-    # optic=Binoculars(
-    #     fov=65,
-    #     magnification=10,
+    # optic=Refractor(
+    #     focal_length=714,
+    #     eyepiece_focal_length=9,
+    #     eyepiece_fov=100,
     # ),
+    optic=Binoculars(
+        fov=65,
+        magnification=35,
+    ),
     style=style,
     resolution=4096,
-    scale=0.236,
+    scale=0.28,
     raise_on_below_horizon=False,
     debug=True,
 )

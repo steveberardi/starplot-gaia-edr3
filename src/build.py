@@ -159,9 +159,12 @@ def build(
 ):
     """Builds a single source file"""
     logger.info(f"Building... {index}")
-    Catalog.build(
-        objects=stars(index, logger, source, mag_min, mag_max, sample_rate),
+    catalog = Catalog(
         path=destination,
+        healpix_nside=nside,
+    )
+    catalog.build(
+        objects=stars(index, logger, source, mag_min, mag_max, sample_rate),
         chunk_size=1_000_000,
         columns=[
             "pk",
@@ -182,7 +185,6 @@ def build(
         partition_columns=["healpix_index"],
         compression="snappy",
         row_group_size=100_000,
-        healpix_nside=nside,
     )
 
 
