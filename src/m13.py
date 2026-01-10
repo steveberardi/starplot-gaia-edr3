@@ -73,15 +73,17 @@ def alpha(star: Star) -> float:
     elif m < 12:
         return 0.9
     elif m < 15:
-        return 0.76
+        return 0.85
 
-    return 0.5
+    return 0.6
 
 
 dt = datetime(2023, 12, 16, 21, 0, 0, tzinfo=ZoneInfo("US/Pacific"))
 
 style = PlotStyle().extend(
     extensions.GRAYSCALE_DARK,
+    # extensions.BLUE_NIGHT,
+    # extensions.GRADIENT_TRUE_NIGHT,
     extensions.OPTIC,
     {"star": {"marker": {"color": "#fff", "edge_color": "#fff"}}},
 )
@@ -103,7 +105,7 @@ p = OpticPlot(
     # Refractor Telescope
     optic=Refractor(
         focal_length=714,
-        eyepiece_focal_length=11,
+        eyepiece_focal_length=8,
         eyepiece_fov=100,
     ),
     # optic=Binoculars(
@@ -122,13 +124,16 @@ p.stars(
     catalog=gaia,
     alpha_fn=alpha,
     size_fn=size,
+    # style__marker__symbol="star_4"
     # color_fn=color_by_bv,
 )
+# p.globular_clusters(where=[_.ngc=="5139"])
 p.stars(
     where=[_.magnitude <= 9],
     where_labels=[False],
     alpha_fn=alpha,
     size_fn=size,
+    # style__marker__symbol="star_4"
     # color_fn=color_by_bv,
 )
 # print(p.magnitude_range)
